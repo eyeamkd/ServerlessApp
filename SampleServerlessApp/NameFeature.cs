@@ -55,11 +55,13 @@ public class NameFeature
     public APIGatewayProxyResponse GetNameById(APIGatewayProxyRequest request, ILambdaContext context)
     {
         context.Logger.LogInformation("Get Request\n");
+        var id = request.PathParameters["id"];
+       
 
         var response = new APIGatewayProxyResponse
         {
             StatusCode = (int)HttpStatusCode.OK,
-            Body = "This is an endpoint to get name",
+            Body = $"This is an endpoint to get name with id {id}",
             Headers = new Dictionary<string, string> { { "Content-Type", "text/plain" } }
         };
 

@@ -39,11 +39,17 @@ public class FunctionTest
         NameFeature functions = new NameFeature();
 
 
-        request = new APIGatewayProxyRequest();
         context = new TestLambdaContext();
+        request = new APIGatewayProxyRequest
+        {
+            PathParameters = new System.Collections.Generic.Dictionary<string, string>
+                {
+                    { "id", "123" }
+                }
+        };
         response = functions.GetNameById(request, context);
         Assert.Equal(200, response.StatusCode);
-        Assert.Equal("This is an endpoint to get name", response.Body);
+        Assert.Equal($"This is an endpoint to get name with id 123", response.Body);
     }
 
     [Fact]
